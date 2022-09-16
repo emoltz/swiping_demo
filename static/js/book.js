@@ -1,4 +1,16 @@
-class Card {
+class BookStack {
+    bookStack = [];
+
+    addBook(book){
+        this.bookStack.push(book);
+    }
+
+    removeBook(book){
+        this.bookStack.remove(book);
+    }
+}
+
+class Book {
     constructor({
                     imageUrl,
                     onDismiss,
@@ -74,7 +86,7 @@ class Card {
         this.element.style.transform = `translate(${this.#offsetX}px, ${this.#offsetY}px) rotate(${rotate}deg)`;
         // dismiss card
         if (Math.abs(this.#offsetX) > this.element.clientWidth * 0.7) {
-            this.#dismiss(this.#offsetX > 0 ? 1 : -1);
+            this.dismiss(this.#offsetX > 0 ? 1 : -1);
         }
     }
 
@@ -107,7 +119,7 @@ class Card {
         this.element.style.transform = '';
     }
 
-    #dismiss = (direction) => {
+    dismiss = (direction) => {
         this.#startPoint = null;
         document.removeEventListener('mouseup', this.#handleMoveUp);
         document.removeEventListener('mousemove', this.#handleMouseMove);

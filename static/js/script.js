@@ -32,10 +32,11 @@ const images = [
 let cardCount = 0;
 
 // functions
-let card = null;
+let book = null;
+let bookStack = new BookStack();
 
 function appendNewCard() {
-    card = new Card({
+    book = new Book({
         imageUrl: images[cardCount % 5],
         onDismiss: appendNewCard,
         onLike: () => {
@@ -47,7 +48,8 @@ function appendNewCard() {
             dislike.classList.toggle('trigger');
         }
     });
-    swiper.append(card.element);
+    swiper.append(book.element);
+    bookStack.addBook(book);
     cardCount++;
 
     //ensures that we are talking about only the cards in the stack that are NOT the swiped book
@@ -62,10 +64,11 @@ function appendNewCard() {
 for (let i = 0; i < 5; i++) {
     appendNewCard();
 }
-
 like.addEventListener('click', () => {
     like.style.animationPlayState = 'running';
     like.classList.toggle('trigger');
+    console.log(bookStack)
+    bookStack.removeBook(book);
 });
 
 dislike.addEventListener('click', () => {
