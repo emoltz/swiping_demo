@@ -2,6 +2,7 @@
 const swiper = document.querySelector('#swiper');
 const like = document.querySelector('#like');
 const dislike = document.querySelector('#dislike');
+const shelf = document.querySelector('#bookshelf');
 
 // constants
 const urls = [
@@ -31,8 +32,10 @@ const images = [
 let cardCount = 0;
 
 // functions
+let card = null;
+
 function appendNewCard() {
-    const card = new Card({
+    card = new Card({
         imageUrl: images[cardCount % 5],
         onDismiss: appendNewCard,
         onLike: () => {
@@ -47,7 +50,9 @@ function appendNewCard() {
     swiper.append(card.element);
     cardCount++;
 
+    //ensures that we are talking about only the cards in the stack that are NOT the swiped book
     const cards = swiper.querySelectorAll('.card:not(.dismissing)');
+    //this makes the next item in the stack come up to the top
     cards.forEach((card, index) => {
         card.style.setProperty('--i', index);
     });
@@ -58,3 +63,12 @@ for (let i = 0; i < 5; i++) {
     appendNewCard();
 }
 
+like.addEventListener('click', () => {
+    like.style.animationPlayState = 'running';
+    like.classList.toggle('trigger');
+});
+
+dislike.addEventListener('click', () => {
+    dislike.style.animationPlayState = 'running';
+    dislike.classList.toggle('trigger');
+});

@@ -48,18 +48,20 @@ body {
 }
 
 #like,
-#dislike {
+#dislike,
+#bookshelf{
   font-size: 5vh;
   border-radius: 50%;
   padding: 20px;
   /*position: relative;*/
   z-index: 1;
   animation-name: animation1;
-  animation-duration: 1s;
-  animation-timing-function: ease-in-out;
+  animation-duration: .5s;
+  animation-timing-function: ease-out;
   animation-fill-mode: both;
   /* don't run animation at the beginning */
   animation-play-state: paused;
+  cursor: pointer;
 }
 
 #like.trigger,
@@ -73,6 +75,11 @@ body {
 }
 
 #dislike {
+  color: #ccc;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+#bookshelf{
   color: #ccc;
   background-color: rgba(0, 0, 0, 0.5);
 }
